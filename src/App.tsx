@@ -4,11 +4,6 @@ import Routes from '../src/components/Router'
 import { BrowserRouter as Router } from "react-router-dom";
 
 function App() {
-  let state : number
-
-  function sample(str?:string):string{
-    return ("sample function")
-  }
 
   return (
     <div className="App">

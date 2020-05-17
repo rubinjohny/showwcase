@@ -4,10 +4,22 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+import { createStore } from 'redux';
+import { user } from './reducers/index';
+import { StoreState } from './types/index';
+import { userAction } from './actions';
+import { Provider } from 'react-redux';
+
+const store = createStore<StoreState,userAction,any,any>(user, {
+  userName: "name not found",
+});
+
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Provider store={store}>
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  </Provider>,
   document.getElementById('root')
 );
 
