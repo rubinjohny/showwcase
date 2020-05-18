@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import * as actions from '../actions/';
 import { StoreState } from '../types/index';
 import {connect} from 'react-redux';
@@ -6,16 +6,21 @@ import { Dispatch} from 'redux'
 import Header from '../components/Header';
 import {Box, Text} from '../components/StyledComponents'
 import Education from '../components/Education'
+import Modal from '../components/Modal'
 export interface Props {
    name: string;
    adduser?: (name:string) => void;
 }
 
 const Dashboard = ({name,adduser}:Props) => {
+   const [showModal, setModal] = useState(false);
+   function handleCloseModal(){
+      setModal(false)
+   }
    
    return(
       <React.Fragment>
-         <Header name={name} />
+         <Header name={name} setModal={setModal} />
          <Box pt={5} flex={1} justifyContent="space-evenly">
             
             <Box gridRowGap={10} bg="#2d2828" flex={2} flexDirection="column" minHeight="100px" maxHeight="300px" m={3} >
@@ -36,6 +41,9 @@ const Dashboard = ({name,adduser}:Props) => {
                <Education university="California State University"/>
             </Box>
          </Box>
+
+         <Modal showModal={showModal} handleCloseModal={handleCloseModal}/>
+         
       </React.Fragment>
    )
 }
