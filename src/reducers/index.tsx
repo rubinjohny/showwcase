@@ -1,13 +1,20 @@
 import {StoreState} from '../types/index'
 import { Reducer } from "redux";
-import {ADD_USER} from '../constants/index'
-import {userAction} from '../actions/index'
+import * as constants from '../constants/index'
+import * as actions from '../actions/index'
 
 
-export const user: Reducer = (state:StoreState, action:userAction): StoreState => {
+export const user: Reducer = (state:StoreState, action:actions.userAction|actions.add_education): StoreState => {
    switch (action.type) {
-      case ADD_USER:
+      case constants.ADD_USER:
          return { ...state, userName: action?.payload?.name? action.payload.name:state.userName };
+      
+      case constants.ADD_EDUCATION:{
+         let arr = state.education;
+         arr.push(action.payload.education)
+         return { ...state, education: arr }
+      }
+         
    }
    return state;
 }

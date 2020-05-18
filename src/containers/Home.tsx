@@ -17,11 +17,11 @@ const Home:FunctionComponent<Props> = ({adduser}:Props) => {
    const history = useHistory();
 
    function onEnter(){
-      if(username == "")
+      if(username === "")
          alert("please enter name!")
       else{
          adduser(username)
-         history.push("/dashboard")   
+         history.push("/dashboard")
       }
    }
 
@@ -41,7 +41,7 @@ const Home:FunctionComponent<Props> = ({adduser}:Props) => {
 
                <Box flexDirection="column" justifyContent="space-evenly" flex={2}>
                   <Text color="white">Type your name and click "Enter" to begin</Text>
-                  <Input width="80%" placeholder="Enter Name" borderRadius={10} borderColor="white" border={0} height="30px" alignSelf="center" onChange={e => setName(e.target.value)} onKeyDown={e => e.keyCode == 13? onEnter() : null }/>
+                  <Input width="80%" placeholder="Enter Name" borderRadius={10} borderColor="white" border={0} height="30px" alignSelf="center" onChange={e => setName(e.target.value)} onKeyDown={e => e.keyCode === 13? onEnter() : null }/>
                   <Button type="submit" width="50%" borderRadius={10} height="30px" alignSelf="center" onClick={() => onEnter()}>Enter</Button>
                </Box>
 

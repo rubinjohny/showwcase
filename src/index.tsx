@@ -10,8 +10,9 @@ import { StoreState } from './types/index';
 import { userAction } from './actions';
 import { Provider } from 'react-redux';
 
-const store = createStore<StoreState,userAction,any,any>(user, {
-  userName: "name not found",
+const store = createStore<StoreState,any,any,any>(user, {
+  userName: "",
+  education:[]
 });
 
 ReactDOM.render(

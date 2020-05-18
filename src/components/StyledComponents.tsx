@@ -38,6 +38,17 @@ ${flexbox}
   }
 `
 
+export const BlueButton = styled(Button)`
+${color}
+&:hover {
+    color: white;
+    transform: scale(1.1)
+  }
+  &:focus {
+     outline:none
+  }
+`
+
 export const StyledHeader = styled.div`
 ${position}
 ${color}
