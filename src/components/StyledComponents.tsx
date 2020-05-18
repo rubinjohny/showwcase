@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { flexbox, layout, space, color, border, shadow } from 'styled-system'
+import { flexbox, layout, space, color, border, shadow, position, grid } from 'styled-system'
 
 export const Box = styled.div`
   ${flexbox}
@@ -8,10 +8,12 @@ export const Box = styled.div`
   ${color}
   ${border}
   ${shadow}
+  ${grid}
   display:flex;
 `
 export const Text = styled.span`
 ${color}
+${space}
 `
 
 export const Input = styled.input`
@@ -34,4 +36,16 @@ ${flexbox}
   &:focus {
      outline:none
   }
+`
+
+export const StyledHeader = styled.div`
+${position}
+${color}
+${flexbox}
+${space}
+${layout}
+display:flex;
+position:fixed;
+background-color:#2d2828;
+height:50px;
 `
