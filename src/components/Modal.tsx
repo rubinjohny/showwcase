@@ -6,7 +6,7 @@ import { Box, BlueButton, Button, Text}  from './StyledComponents'
 import axios from 'axios'
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux'
-import { StoreState, edu } from '../types/index';
+import { edu } from '../types/index';
 import * as actions from '../actions/index';
 
 const fadeIn = keyframes`
@@ -56,8 +56,10 @@ const Modal = ({showModal, handleCloseModal, addEducation}:Props) => {
    const [degree, setDegree] = useState('');
    const [field, setField] = useState('');
    const [grade, setGrade] = useState('');
-   const [startDate, setStartDate] = useState(Date);
-   const [endDate, setEndDate] = useState(Date);
+   const [startDate, setStartDate] = useState("");
+   const [endDate, setEndDate] = useState("");
+   const [startDateset,startDateSetTrue] = useState(false);
+   const [endDateset,endDateSetTrue] = useState(false);
    const [options, setOptions] = useState<{ value: string }[]>([]);
    const [description, setDescription] = useState('');
 
@@ -69,7 +71,7 @@ const Modal = ({showModal, handleCloseModal, addEducation}:Props) => {
             setOptions(searchText ? res.data.slice(0, 10).map((item, i) => ({ value: item.name, key: i })):[])
          })
          .catch(err => console.log(err))
-      }, 2000);
+      }, 500);
    };
 
    const clearStates = () => {
@@ -85,11 +87,12 @@ const Modal = ({showModal, handleCloseModal, addEducation}:Props) => {
    }
 
    const onSave = () => {
-      console.log("onSave", { university: name, location, degree, field, grade, startDate, endDate, description });
-      if(name === "" || location === "" || degree === "" || field === "" || startDate === "")
+      if(name === "" || location === "" || degree === "" || field === "" || !startDateset || !endDateset)
          alert("Please enter all required fields!")
       else{
-         addEducation({ university: name, location, degree, field, grade, startDate, endDate, description })
+         let start = startDate.split("-")[1] + "/" + startDate.split("-")[0];
+         let end = endDate.split("-")[1] + "/" + endDate.split("-")[0];
+         addEducation({ university: name, location, degree, field, grade, startDate:start, endDate:end, description })
          handleCloseModal()
          clearStates()
       }
@@ -151,11 +154,11 @@ const Modal = ({showModal, handleCloseModal, addEducation}:Props) => {
             <Box>
                <Box flexDirection="column" p={3}>
                   <Text>Start Date<Text color="red">*</Text></Text>
-                  <DatePicker onChange={(date, dateString) => {setStartDate(dateString)}} picker="month" />
+                  <DatePicker onChange={(date, dateString) => { endDateSetTrue(true);setStartDate(dateString)}} picker="month" />
                </Box>
                <Box flexDirection="column" p={3}>
-                  <Text>End/Expected Date</Text>
-                  <DatePicker onChange={(date, dateString) => { setEndDate(dateString) }} picker="month" />
+                  <Text>End/Expected Date<Text color="red">*</Text></Text>
+                  <DatePicker onChange={(date, dateString) => { startDateSetTrue(true);setEndDate(dateString) }} picker="month" />
                </Box>
             </Box>
 

@@ -3,17 +3,17 @@ import {Box, Text} from './StyledComponents'
 import {Education} from '../types/index'
 
 interface Props {
-   data:Education
+   data:Education;
 }
 
 const EducationCard = ({data}:Props) => {
 
    return(
-      <Box m={2} mt={0} flexDirection="column" border="1px solid lightgrey"> 
+      <Box m={2} mt={0} flexDirection="column" border="1px solid lightgrey" > 
          <Box bg="#2d2828" justifyContent="space-between" p={2}>
             <Text>{data.university}</Text>
             <Text>{data.location}</Text>
-            <Text>{data.startDate.split("-")[1]}/{data.startDate.split("-")[0]} - {data.endDate.split("-")[1]}/{data.endDate.split("-")[0]}</Text>
+            <Text>{data.startDate} - {data.endDate}</Text>
          </Box>
          <Box p={2} justifyContent="space-between">
             <Text color="black">{data.degree}, {data.field}</Text>

@@ -7,7 +7,6 @@ import * as serviceWorker from './serviceWorker';
 import { createStore } from 'redux';
 import { user } from './reducers/index';
 import { StoreState } from './types/index';
-import { userAction } from './actions';
 import { Provider } from 'react-redux';
 
 const store = createStore<StoreState,any,any,any>(user, {

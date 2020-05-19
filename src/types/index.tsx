@@ -3,10 +3,10 @@ export interface Education {
    location:string;
    degree:string;
    field:string;
-   grade:string;
+   grade?:string;
    startDate:string;
    endDate:string;
-   description:string;
+   description?:string;
 }
 export type edu = Education;
 export interface StoreState {
