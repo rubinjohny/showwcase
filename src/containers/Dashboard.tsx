@@ -1,13 +1,29 @@
 import React, {useState} from 'react';
-import * as actions from '../actions/';
+import * as actions from '../redux/actions';
 import { StoreState, edu } from '../types/index';
 import {connect} from 'react-redux';
 import { Dispatch} from 'redux'
 import Header from '../components/Header';
-import {Box, Text} from '../components/StyledComponents'
+import {Box, Text, TextEllipsis} from '../components/StyledComponents'
 import EducationCard from '../components/Education'
 import Modal from '../components/Modal'
 import Emoji from '../components/Emoji'
+
+
+// const data = [
+//    {
+//       university:"University of San Francisco",
+//       location:"California",
+//       degree:"Masters",
+//       field:"Computer Science",
+//       duration:[undefined, undefined],
+//       grade:"0",
+//       "max grade":"4.0",
+//       startDate:"undefined",
+//       endDate:"undefined",
+//       description:"<p><strong>asd</strong></p>"
+//    }
+// ]
 
 export interface Props {
    name: string;
@@ -34,7 +50,7 @@ const Dashboard = ({name, education}:Props) => {
                      </Box>
                      <Box flexDirection="column" alignItems="flex-start" px={2}>
                         {education.slice(0).reverse().map((edu,i)=>(
-                           <Text key={i} color="white" p={1}>{edu.university}</Text>
+                           <TextEllipsis key={i}>{edu.university}</TextEllipsis>
                         ))}
                      </Box>
                   </Box>
@@ -43,7 +59,7 @@ const Dashboard = ({name, education}:Props) => {
                      {education.map((item, i) => <EducationCard data={item} key={i} />)}
                   </Box>
                </>
-            )}
+            )} 
             {education.length === 0 && (
                <Box flex={1} justifyContent="center" alignItems="center" height="100%">
                   <Text>it seems empty here!<br />Add education experiences using the button on header <br/><Emoji symbol="😃" label="sheep" size={27} /></Text>

@@ -12,8 +12,19 @@ export const Box = styled.div`
   display:flex;
 `
 export const Text = styled.span`
+${flexbox}
 ${color}
 ${space}
+`
+
+export const TextEllipsis = styled.span`
+width:100%;
+text-overflow:ellipsis;
+white-space:nowrap;
+overflow-x:hidden;
+text-align:left;
+color:white;
+padding:1em;
 `
 
 export const Input = styled.input`
@@ -31,7 +42,8 @@ ${layout}
 ${flexbox}
 &:hover {
     color: #2e78ff;
-    transform: scale(1.1)
+    transform: scale(1.1);
+    cursor:pointer;
   }
   &:focus {
      outline:none
@@ -42,7 +54,8 @@ export const BlueButton = styled(Button)`
 ${color}
 &:hover {
     color: white;
-    transform: scale(1.1)
+    transform: scale(1.1);
+    
   }
   &:focus {
      outline:none

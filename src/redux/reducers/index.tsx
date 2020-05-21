@@ -1,4 +1,4 @@
-import {StoreState} from '../types/index'
+import {StoreState} from '../../types/index'
 import { Reducer } from "redux";
 import * as constants from '../constants/index'
 import * as actions from '../actions/index'
@@ -11,7 +11,7 @@ export const user: Reducer = (state:StoreState, action:actions.userAction|action
       
       case constants.ADD_EDUCATION:{
          let arr = state.education;
-         arr.push(action.payload.education)
+         arr.push(action.payload.education);
          return { ...state, education: arr }
       }
          

@@ -1,5 +1,5 @@
 import * as constants from '../constants';
-import { Education } from '../types';
+import { Education } from '../../types';
 
 export interface AddUser{
    type:constants.ADD_USER,

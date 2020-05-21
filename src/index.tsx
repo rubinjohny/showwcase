@@ -5,7 +5,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 import { createStore } from 'redux';
-import { user } from './reducers/index';
+import { user } from './redux/reducers/index';
 import { StoreState } from './types/index';
 import { Provider } from 'react-redux';
 

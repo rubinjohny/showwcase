@@ -1,13 +1,14 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import ReactModal from 'react-modal';
 import styled, {keyframes } from 'styled-components'
-import { AutoComplete, Input, DatePicker } from 'antd';
+import { AutoComplete, Input, DatePicker, InputNumber } from 'antd';
 import { Box, BlueButton, Button, Text}  from './StyledComponents'
 import axios from 'axios'
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux'
 import { edu } from '../types/index';
-import * as actions from '../actions/index';
+import * as actions from '../redux/actions/index';
+import ModalForm from './ModalForm'
 
 const fadeIn = keyframes`
    0% {
@@ -50,55 +51,14 @@ interface Props {
    addEducation:(edu:edu) => void
 }
 const Modal = ({showModal, handleCloseModal, addEducation}:Props) => {
-   let timer;
-   const [name, setName] = useState('');
-   const [location, setLocation] = useState('');
-   const [degree, setDegree] = useState('');
-   const [field, setField] = useState('');
-   const [grade, setGrade] = useState('');
-   const [startDate, setStartDate] = useState("");
-   const [endDate, setEndDate] = useState("");
-   const [startDateset,startDateSetTrue] = useState(false);
-   const [endDateset,endDateSetTrue] = useState(false);
-   const [options, setOptions] = useState<{ value: string }[]>([]);
-   const [description, setDescription] = useState('');
 
-   const onSearch = (searchText: string) => {
-      clearTimeout(timer);
-      timer = setTimeout(() => {
-         axios.get("http://universities.hipolabs.com/search?name="+searchText)
-         .then(res => {
-            setOptions(searchText ? res.data.slice(0, 10).map((item, i) => ({ value: item.name, key: i })):[])
-         })
-         .catch(err => console.log(err))
-      }, 500);
-   };
+   const [modalValues,setModalValues] = useState({});
 
-   const clearStates = () => {
-      setName("");
-      setLocation("");
-      setDegree("");
-      setField("");
-      setGrade("");
-      setStartDate(Date)
-      setEndDate(Date)
-      setOptions([]);
-      setDescription("");
-   }
-
-   const onSave = () => {
-      if(name === "" || location === "" || degree === "" || field === "" || !startDateset || !endDateset)
-         alert("Please enter all required fields!")
-      else{
-         let start = startDate.split("-")[1] + "/" + startDate.split("-")[0];
-         let end = endDate.split("-")[1] + "/" + endDate.split("-")[0];
-         addEducation({ university: name, location, degree, field, grade, startDate:start, endDate:end, description })
-         handleCloseModal()
-         clearStates()
-      }
+   useEffect(()=> {
+      console.log(modalValues);
       
-   }
-  
+   },[modalValues])
+
    return(
       <StyledReactModal
          isOpen={showModal}
@@ -113,67 +73,10 @@ const Modal = ({showModal, handleCloseModal, addEducation}:Props) => {
       >
          <Box bg="black" height="50px" alignItems="center" justifyContent="space-between" px={3}>
             <Text color="white">Add a new Education Experience</Text>
-            <Button onClick={() => {clearStates(); handleCloseModal()}}> close </Button>
+            <Button onClick={() => {handleCloseModal()}}> close </Button>
          </Box>
 
-         <Box justifyContent="space-evenly" flexDirection="column">
-            <Box flexDirection="column" p={3}>
-               <Text>Name of School<Text color="red">*</Text></Text>
-               <AutoComplete
-                  options={options}
-                  style={{ width: "100%" }}
-                  onSelect={data => setName(data)}
-                  onSearch={onSearch}
-                  placeholder="Enter College here"
-                  onChange={data => setName(data)}
-               />
-            </Box>
-
-            <Box justifyContent="space-evenly">
-               <Box flexDirection="column" p={3} flex={3}>
-                  <Text>Location<Text color="red">*</Text></Text>
-                  <Input placeholder="Enter Location" onChange={e => setLocation(e.target.value)}/>
-               </Box>
-               
-            </Box>
-
-            <Box justifyContent="space-between">
-               <Box flexDirection="column" p={3}>
-                  <Text>Degree<Text color="red">*</Text></Text>
-                  <Input placeholder="Enter Degree" onChange={e => setDegree(e.target.value)} />
-               </Box>
-               <Box flexDirection="column" p={3}>
-                  <Text>Field of Study<Text color="red">*</Text></Text>
-                  <Input placeholder="Enter Location" onChange={e => setField(e.target.value)}/>
-               </Box>
-               <Box flexDirection="column" p={3} flex={1}>
-                  <Text>Grade</Text>
-                  <Input placeholder="Enter Grade" onChange={e => setGrade(e.target.value)} />
-               </Box>
-            </Box>
-            <Box>
-               <Box flexDirection="column" p={3}>
-                  <Text>Start Date<Text color="red">*</Text></Text>
-                  <DatePicker onChange={(date, dateString) => { endDateSetTrue(true);setStartDate(dateString)}} picker="month" />
-               </Box>
-               <Box flexDirection="column" p={3}>
-                  <Text>End/Expected Date<Text color="red">*</Text></Text>
-                  <DatePicker onChange={(date, dateString) => { startDateSetTrue(true);setEndDate(dateString) }} picker="month" />
-               </Box>
-            </Box>
-
-            <Box>
-               <Box flexDirection="column" p={3} flex={1}>
-                  <Text>Description</Text>
-                  <Input.TextArea placeholder="Enter Description" style={{ width: "100%", height: 200 }} onChange={e => setDescription(e.target.value)}/>
-               </Box>
-            </Box>
-
-            <Box p={3} pt={0} justifyContent="flex-end">
-               <BlueButton bg="#1890FF" color="white" border={0} onClick={() => onSave()}>Save</BlueButton>
-            </Box>
-            
-         </Box>
+         <ModalForm setModalValues={setModalValues} handleCloseModal={handleCloseModal}/>
          
       </StyledReactModal>
    )

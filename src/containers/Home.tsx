@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useState } from 'react';
-import * as actions from '../actions/';
+import * as actions from '../redux/actions';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux'
 import { useHistory } from "react-router-dom";
