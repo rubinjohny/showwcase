@@ -12,33 +12,37 @@ import Editor from './TextAreaInput'
 const { RangePicker } = DatePicker;
 type dateType = string|undefined;
 interface Props {
-   setModalValues: ({}) => void
    addEducation: (edu: edu) => void
    handleCloseModal:() => void
 }
-const ModalForm = ({ setModalValues, addEducation, handleCloseModal}:Props) => {
+const ModalForm = ({ addEducation, handleCloseModal}:Props) => {
    const [options, setOptions] = useState<{ value: string }[]>([]);
    const [date, setDate] = useState<dateType[]>([]);
    const [gradeRequired, setGradeRequired] = useState(false);
    const [maxGradeRequired, setMaxGradeRequired] = useState(false);
    const [maxGrade, setMaxGrade] = useState(0);
    const [descJson, setDescJson] = useState({})
+   
+
+   useEffect(() => {
+      onSearch("")
+   })
 
    let timer;
    const onSearch = (searchText: string) => {
+      let timeout = searchText == "" ? 0:500
       clearTimeout(timer);
       timer = setTimeout(() => {
          axios.get("http://universities.hipolabs.com/search?name=" + searchText)
          .then(res => {
-            setOptions(searchText ? res.data.slice(0, 10).map((item, i) => ({ value: item.name, key: i })) : [])
+            setOptions(res.data.slice(0, 10).map((item, i) => ({ value: item.name, key: i })))
          })
          .catch(err => console.log(err))
-      }, 500);
+      }, timeout);
    };
 
    const onFinish = values => {
       console.log('Success:', {...values,description:descJson});
-      setModalValues({ ...values, description: descJson })
 
       let startDate = values.date[0].format("MM/DD/YY");
       let endDate = values.date[1].format("MM/DD/YY");
@@ -57,10 +61,10 @@ const ModalForm = ({ setModalValues, addEducation, handleCloseModal}:Props) => {
       form.validateFields(['grade','max grade']);
    }, [gradeRequired, maxGradeRequired]);
 
+
    return (
       <Form
          name="education"
-         initialValues={{ remember: true }}
          onFinish={onFinish}
          onFinishFailed={onFinishFailed}
          layout="vertical"
@@ -77,6 +81,7 @@ const ModalForm = ({ setModalValues, addEducation, handleCloseModal}:Props) => {
                style={{ width: "100%" }}
                onSearch={onSearch}
                placeholder="Enter College here"
+               notFoundContent="Couldnt find university"
             />
          </Form.Item>
 

@@ -47,17 +47,12 @@ const StyledReactModal = styled(ReactModal)`
 `;
 interface Props {
    showModal:boolean;
-   handleCloseModal:() => void
-   addEducation:(edu:edu) => void
+   handleCloseModal:() => void;
+   addEducation:(edu:edu) => void;
+   setModalFormValues:({}) => void;
 }
-const Modal = ({showModal, handleCloseModal, addEducation}:Props) => {
+const Modal = ({ showModal, handleCloseModal, setModalFormValues}:Props) => {
 
-   const [modalValues,setModalValues] = useState({});
-
-   useEffect(()=> {
-      console.log(modalValues);
-      
-   },[modalValues])
 
    return(
       <StyledReactModal
@@ -68,15 +63,15 @@ const Modal = ({showModal, handleCloseModal, addEducation}:Props) => {
             overlay: Styles.overlay,
             content: Styles.content
          }}
-         shouldCloseOnOverlayClick={true}
-         onRequestClose={handleCloseModal}
+         shouldCloseOnOverlayClick={false}
+         // onRequestClose={handleCloseModal}
       >
          <Box bg="black" height="50px" alignItems="center" justifyContent="space-between" px={3}>
             <Text color="white">Add a new Education Experience</Text>
             <Button onClick={() => {handleCloseModal()}}> close </Button>
          </Box>
 
-         <ModalForm setModalValues={setModalValues} handleCloseModal={handleCloseModal}/>
+         <ModalForm  handleCloseModal={handleCloseModal}/>
          
       </StyledReactModal>
    )

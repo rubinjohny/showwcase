@@ -33,6 +33,8 @@ export interface Props {
 
 const Dashboard = ({name, education}:Props) => {
    const [showModal, setModal] = useState(false);
+   const [modalFormValues, setModalFormValues] = useState({});
+
    function handleCloseModal(){
       setModal(false)
    }
@@ -67,7 +69,7 @@ const Dashboard = ({name, education}:Props) => {
             )}
          </Box>
 
-         <Modal showModal={showModal} handleCloseModal={handleCloseModal}/>
+         <Modal showModal={showModal} handleCloseModal={handleCloseModal} setModalFormValues={setModalFormValues} />
          
       </React.Fragment>
    )
