@@ -1,5 +1,5 @@
+//Can have showwcase based notification style
 import { notification } from 'antd';
-
 
 export const Notify = (message, description, type = "") => {
    
@@ -27,6 +27,4 @@ export const Notify = (message, description, type = "") => {
       }
 
    }
-   
-
 }

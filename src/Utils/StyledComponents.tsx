@@ -50,6 +50,8 @@ export const ColSpaceEvenly = styled(Col)`
 justify-content:space-evenly;
 `
 
+
+// Text -----------------------------------------------------------------
 export const Text = styled.span`
 ${flexbox}
 ${color}
@@ -69,6 +71,9 @@ text-align:left;
 color:white;
 padding:1em;
 `
+
+
+// Others -----------------------------------------------------------------
 
 export const Input = styled.input`
 ${border}

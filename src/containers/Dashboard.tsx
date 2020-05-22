@@ -1,3 +1,4 @@
+// component that lets users add thei education experiences
 import React, {useState} from 'react';
 import { StoreState } from '../types/index';
 import { useSelector } from 'react-redux'

@@ -1,3 +1,5 @@
+//Form to enter Education details
+//used antd forms since I am familiar with their components
 import React, {useState, useEffect} from 'react';
 import { useDispatch } from 'react-redux';
 import * as actions from '../redux/actions/index';
@@ -20,7 +22,7 @@ const ModalForm = ({ handleCloseModal}:Props) => {
    const [gradeRequired, setGradeRequired] = useState(false);
    const [maxGradeRequired, setMaxGradeRequired] = useState(false);
    const [maxGrade, setMaxGrade] = useState(0);
-   const [descJson, setDescJson] = useState({})
+   const [desc, setDesc] = useState({})
    
    const dispatch = useDispatch();
 
@@ -42,14 +44,11 @@ const ModalForm = ({ handleCloseModal}:Props) => {
    };
 
    const onFinish = values => {
-      console.log('Success:', {...values,description:descJson});
-
       let startDate = values.date[0].format("MM/DD/YY");
       let endDate = values.date[1].format("MM/DD/YY");
-
       let edu = { 
          ...values, 
-         description: descJson, 
+         description: desc, 
          grade: (values.grade && values["max grade"]) ? values.grade + "/" + values["max grade"] : "", 
          startDate: startDate !== "undefined" ? startDate : "", 
          endDate: endDate !== "undefined" ? endDate : "" 
@@ -108,7 +107,7 @@ const ModalForm = ({ handleCloseModal}:Props) => {
                rules={[{ required: true, message: 'Please select your Degree!' }]}
                style={{ margin: 10, width:"100%" }}
             >
-               <Select onChange={(val) => console.log(val)}>
+               <Select>
                   {degrees.map((deg,i) => <Select.Option key={i} value={deg}>{deg}</Select.Option>)}
                </Select>
             </Form.Item>
@@ -119,7 +118,7 @@ const ModalForm = ({ handleCloseModal}:Props) => {
                rules={[{ required: true, message: 'Please input your Field!' }]}
                style={{ margin: 10, width: "100%" }}
             >
-               <Select onChange={(val) => console.log(val)}>
+               <Select>
                   {fields.map((field, i) => <Select.Option key={i} value={field}>{field}</Select.Option>)}
                </Select>
             </Form.Item>
@@ -158,7 +157,7 @@ const ModalForm = ({ handleCloseModal}:Props) => {
                rules={[{ required: maxGradeRequired, message: 'Please input your Grade!'}]}
                style={{ margin: 10, flex:1 , marginLeft:0}}
             >
-               <Select allowClear onChange={val => {console.log("select val = ",val); setMaxGrade(val?parseFloat(val.toString()):0);setGradeRequired(val ? true : false)}}>
+               <Select allowClear onChange={val => {setMaxGrade(val?parseFloat(val.toString()):0);setGradeRequired(val ? true : false)}}>
                   {gradeScales.map((grade,i) => <Select.Option value={grade} key={i}>{parseFloat(grade.toString()).toPrecision(3)}</Select.Option>)}
                </Select>
             </Form.Item>
@@ -170,7 +169,7 @@ const ModalForm = ({ handleCloseModal}:Props) => {
             name="description"
             style={{ margin: 10 }}
          >
-            <Editor setDescJson={setDescJson}/>
+            <Editor setDesc={setDesc}/>
          </Form.Item>
 
          <Form.Item 

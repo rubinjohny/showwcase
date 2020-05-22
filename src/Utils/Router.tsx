@@ -1,3 +1,4 @@
+// routing for home and dashboard
 import React from 'react';
 import {
    Switch,

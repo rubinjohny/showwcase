@@ -5,30 +5,23 @@ import { Editor } from 'react-draft-wysiwyg';
 import draftToHtml from 'draftjs-to-html';
 import {checkDescriptionEmpty} from '../Utils/Utils'
 
-const MyEditor = ({setDescJson}) => {
+const MyEditor = ({setDesc}) => {
 
-   const [e, sete] = useState(EditorState.createEmpty());
+   const [editor, setEditor] = useState(EditorState.createEmpty());
    const [content, setContentState] = useState("");
 
    useEffect(()=>{
-
       let markup = draftToHtml(
-         convertToRaw(e.getCurrentContent()),
+         convertToRaw(editor.getCurrentContent()),
          {}
       );
-      
-
-      setDescJson(checkDescriptionEmpty(markup) ? "":markup)
+      setDesc(checkDescriptionEmpty(markup) ? "":markup)
    },[content])
-
-   const onEditorStateChange = (editorState) => {
-      sete(editorState)
-   };
 
    return (
       <Editor
-         initialEditorState={e}
-         onEditorStateChange={editorState => onEditorStateChange(editorState)}
+         initialEditorState={editor}
+         onEditorStateChange={editorState => setEditor(editorState)}
          onContentStateChange={contentState => setContentState(contentState)}
          toolbar={{ options: ['inline','list'],}}
          wrapperStyle={{ border: "1px lightgrey solid"}}
@@ -36,7 +29,6 @@ const MyEditor = ({setDescJson}) => {
          toolbarStyle={{ margin:0}}
       />
    )
-                
 }
 
 export default MyEditor as Editor;

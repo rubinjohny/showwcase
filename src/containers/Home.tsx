@@ -1,3 +1,5 @@
+//Home page - Welcome message and option to input name
+
 import React, { FunctionComponent, useState } from 'react';
 import * as actions from '../redux/actions';
 import { useDispatch } from 'react-redux'
@@ -23,9 +25,7 @@ const Home:FunctionComponent = () => {
 
    return(
       <Box height={window.innerHeight} justifyContent="center" bg="#2d2828">
-
          <BorderBox height="300px">
-
             <ColSpaceEvenly p={3}>
                <BoxCentered>
                   <Text white>
@@ -34,15 +34,12 @@ const Home:FunctionComponent = () => {
                      Welcome to your education Showwcase!
                   </Text>
                </BoxCentered>
-
                <ColSpaceEvenly flex={2}>
                   <Text white>Tell us your Name</Text>
                   <Input width="80%" maxLength={25} placeholder="Enter Name" onChange={e => setName(e.target.value)} onKeyDown={e => e.keyCode === 13? onEnter() : null }/>
                   <Button type="submit" width="50%" onClick={() => onEnter()}>Enter</Button>
                </ColSpaceEvenly>
-
             </ColSpaceEvenly>
-
          </BorderBox>
       </Box>
    )

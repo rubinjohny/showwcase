@@ -1,3 +1,4 @@
+// Reusable modal with showwcase theme (for header)
 import React, {FunctionComponent} from 'react';
 import ReactModal from 'react-modal';
 import styled, {keyframes } from 'styled-components'
@@ -46,29 +47,24 @@ interface Props {
    contentStyle?:{};
    onCloseButton:() => void;
 }
-const Modal: FunctionComponent<Props> = ({ showModal, onCloseButton, headerText, overlayStyle, contentStyle, contentlabel, children}) => {
+const Modal: FunctionComponent<Props> = ({ showModal, onCloseButton, headerText, overlayStyle, contentStyle, contentlabel, children}) => (
+   <StyledReactModal
+      isOpen={showModal}
+      contentLabel={contentlabel}
+      ariaHideApp={false}
+      style={{
+         overlay: overlayStyle ? overlayStyle : Styles.overlay,
+         content: contentStyle ? contentStyle : Styles.content
+      }}
+      shouldCloseOnOverlayClick={false}
+   >
+      <DarkRow height="50px" alignItems="center" justifyContent="space-between" px={3}>
+         <Text white>{headerText}</Text>
+         <Button onClick={() => { onCloseButton() }}> close </Button>
+      </DarkRow>
 
+      {children}
 
-   return(
-      <StyledReactModal
-         isOpen={showModal}
-         contentLabel={contentlabel}
-         ariaHideApp={false}
-         style={{
-            overlay: overlayStyle ? overlayStyle : Styles.overlay,
-            content: contentStyle ? contentStyle : Styles.content
-         }}
-         shouldCloseOnOverlayClick={false}
-      >
-         <DarkRow height="50px" alignItems="center" justifyContent="space-between" px={3}>
-            <Text white>{headerText}</Text>
-            <Button onClick={() => { onCloseButton()}}> close </Button>
-         </DarkRow>
-
-         {children}
-         
-      </StyledReactModal>
-   )
-}
-
+   </StyledReactModal>
+)
 export default Modal;
