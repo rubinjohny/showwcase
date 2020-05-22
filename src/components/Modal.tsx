@@ -1,7 +1,7 @@
 import React, {FunctionComponent} from 'react';
 import ReactModal from 'react-modal';
 import styled, {keyframes } from 'styled-components'
-import { Box, Button, Text}  from '../Utils/StyledComponents'
+import { Box, Button, Text, DarkRow}  from '../Utils/StyledComponents'
 
 const fadeIn = keyframes`
    0% {
@@ -60,10 +60,10 @@ const Modal: FunctionComponent<Props> = ({ showModal, onCloseButton, headerText,
          }}
          shouldCloseOnOverlayClick={false}
       >
-         <Box bg="black" height="50px" alignItems="center" justifyContent="space-between" px={3}>
-            <Text color="white">{headerText}</Text>
+         <DarkRow height="50px" alignItems="center" justifyContent="space-between" px={3}>
+            <Text white>{headerText}</Text>
             <Button onClick={() => { onCloseButton()}}> close </Button>
-         </Box>
+         </DarkRow>
 
          {children}
          

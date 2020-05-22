@@ -55,13 +55,12 @@ const ModalForm = ({ handleCloseModal}:Props) => {
          endDate: endDate !== "undefined" ? endDate : "" 
       }
       dispatch(actions.addEducation(edu))
-      Notify("Education added successfully!","")
+      Notify("Education added successfully!","", "success")
       handleCloseModal()
    };
 
    const onFinishFailed = errorInfo => {
-         
-      console.log('Failed:', errorInfo);
+      Notify("Fill all required fields","", "warn")
    };
 
    const [form] = Form.useForm();
@@ -166,8 +165,6 @@ const ModalForm = ({ handleCloseModal}:Props) => {
 
          </Box>
 
-        
-
          <Form.Item
             label="Description - (write a short summary of your experiences)"
             name="description"
@@ -175,8 +172,6 @@ const ModalForm = ({ handleCloseModal}:Props) => {
          >
             <Editor setDescJson={setDescJson}/>
          </Form.Item>
-
-
 
          <Form.Item 
             style={{ margin: 10 }}

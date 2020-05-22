@@ -2,10 +2,10 @@ import React, {useState} from 'react';
 import { StoreState } from '../types/index';
 import { useSelector } from 'react-redux'
 import Header from '../components/Header';
-import {Box, Text, TextEllipsis} from '../Utils/StyledComponents'
-import EducationCard from '../components/Education'
+import {Box, Text, TextEllipsis, DarkCol, BoxCentered, Col} from '../Utils/StyledComponents'
+import EducationCard from '../components/EducationCard'
 import Modal from '../components/Modal'
-import Emoji from '../components/Emoji'
+import Emoji from '../Utils/Emoji'
 import ModalForm from '../components/ModalForm'
 
 const Dashboard = () => {
@@ -25,26 +25,26 @@ const Dashboard = () => {
 
             {education.length > 0 && (
                <>
-                  <Box gridRowGap={10} bg="#2d2828" flex={2} flexDirection="column" minHeight="100px" maxHeight={window.innerHeight - 90} overflowY="scroll" m={3} >
+                  <DarkCol flex={2} minHeight="100px" maxHeight={window.innerHeight - 90} overflowY="scroll" m={3} >
                      <Box p={3} justifyContent="center">
-                        <Text color="white"> Showwcase University</Text>
+                        <Text white head underline> Showwcase University</Text>
                      </Box>
-                     <Box flexDirection="column" alignItems="flex-start" px={2}>
+                     <Col alignItems="flex-start" px={2}>
                         {education.slice(0).reverse().map((edu,i)=>(
                            <TextEllipsis key={i}>{edu.university}</TextEllipsis>
                         ))}
-                     </Box>
-                  </Box>
+                     </Col>
+                  </DarkCol>
 
-                  <Box flex={7} m={3} flexDirection="column" color="white" >
+                  <Col flex={7} m={3} >
                      {education.map((item, i) => <EducationCard data={item} key={i} />)}
-                  </Box>
+                  </Col>
                </>
             )} 
             {education.length === 0 && (
-               <Box flex={1} justifyContent="center" alignItems="center" height="100%">
+               <BoxCentered height="100%">
                   <Text>it seems empty here!<br />Add education experiences using the button on header <br/><Emoji symbol="😃" label="sheep" size={27} /></Text>
-               </Box>
+               </BoxCentered>
             )}
          </Box>
 
