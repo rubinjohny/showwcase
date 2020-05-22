@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux'
 import { useHistory } from "react-router-dom";
 import Emoji from '../components/Emoji'
 import {Box, Text, Input, Button} from '../Utils/StyledComponents';
+import {Notify} from '../Utils/Notification'
 
 const Home:FunctionComponent = () => {
 
@@ -13,7 +14,7 @@ const Home:FunctionComponent = () => {
 
    function onEnter(){
       if(username === "")
-         alert("please enter name!")
+         Notify("Enter Name","It's OK! we can be friends!!");
       else{
          dispatch(actions.addUser(username))
          history.push("/dashboard")

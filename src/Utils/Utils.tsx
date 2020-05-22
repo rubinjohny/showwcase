@@ -32,5 +32,5 @@ export const gradeScales = [
 ]
 
 export const checkDescriptionEmpty = (markup) => {
-   return markup.trimEnd() == "<p></p>";
+   return markup.trimEnd() === "<p></p>";
 }

@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import {Box, Text} from '../Utils/StyledComponents'
 import {Education} from '../types/index'
 import {LocationIcon, GraduationIcon, CalenderIcon, GradesIcon} from "../Utils/IconComponents"
@@ -22,10 +22,10 @@ const EducationCard = ({data}:Props) => {
             <Text>{LocationIcon}{data.location}</Text>
          </Box>
          <Box p={2} justifyContent="space-between">
-         {(data.startDate != "" && data.endDate != "") && (<Text color="black">{CalenderIcon}{data.startDate} - {data.endDate}</Text>)}
-            <Text color="black">{data.grade != "" ? GradesIcon:""}{data.grade}</Text>
+         {(data.startDate !== "" && data.endDate !== "") && (<Text color="black">{CalenderIcon}{data.startDate} - {data.endDate}</Text>)}
+            <Text color="black">{data.grade !== "" ? GradesIcon:""}{data.grade}</Text>
          </Box>
-         {data.description != "" && (<Box p={2}>
+         {data.description !== "" && (<Box p={2}>
             <Text color="black"><div dangerouslySetInnerHTML={{ __html: data.description ? data.description : "" }} style={{ width: "100%", textAlign: 'left', maxHeight:200, overflow:'scroll' }} /></Text>
          </Box>)}
       </Box>

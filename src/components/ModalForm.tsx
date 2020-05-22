@@ -1,13 +1,12 @@
 import React, {useState, useEffect} from 'react';
-import { connect, useDispatch } from 'react-redux';
-import { Dispatch } from 'redux'
-import { edu } from '../types/index';
+import { useDispatch } from 'react-redux';
 import * as actions from '../redux/actions/index';
 import { Form, Input, Button, Select, AutoComplete, DatePicker, InputNumber } from 'antd';
 import {degrees, fields, gradeScales} from '../Utils/Utils'
 import axios from 'axios'
-import {Box,Text} from "../Utils/StyledComponents"
-import Editor from './TextAreaInput'
+import {Box} from "../Utils/StyledComponents"
+import Editor from './TextEditor'
+import { Notify } from '../Utils/Notification'
 
 const { RangePicker } = DatePicker;
 type dateType = string|undefined;
@@ -31,7 +30,7 @@ const ModalForm = ({ handleCloseModal}:Props) => {
 
    let timer;
    const onSearch = (searchText: string) => {
-      let timeout = searchText == "" ? 0:500
+      let timeout = searchText === "" ? 0:500
       clearTimeout(timer);
       timer = setTimeout(() => {
          axios.get("http://universities.hipolabs.com/search?name=" + searchText)
@@ -52,11 +51,11 @@ const ModalForm = ({ handleCloseModal}:Props) => {
          ...values, 
          description: descJson, 
          grade: (values.grade && values["max grade"]) ? values.grade + "/" + values["max grade"] : "", 
-         startDate: startDate != "undefined" ? startDate : "", 
-         endDate: endDate != "undefined" ? endDate : "" 
+         startDate: startDate !== "undefined" ? startDate : "", 
+         endDate: endDate !== "undefined" ? endDate : "" 
       }
       dispatch(actions.addEducation(edu))
-
+      Notify("Education added successfully!","")
       handleCloseModal()
    };
 
@@ -148,7 +147,7 @@ const ModalForm = ({ handleCloseModal}:Props) => {
             >
                <InputNumber 
                   placeholder="Obtained Grade" 
-                  onChange={val => {console.log("val = ", val);setMaxGradeRequired(!(val == "" || val == 0 || val == null))}} 
+                  onChange={val => setMaxGradeRequired(!(val === "" || val === 0 || val === null))}
                   max={maxGrade}
                   min={0}
                   style={{ width:'100%'}}

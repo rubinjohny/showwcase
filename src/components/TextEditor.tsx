@@ -16,6 +16,7 @@ const MyEditor = ({setDescJson}) => {
          convertToRaw(e.getCurrentContent()),
          {}
       );
+      
 
       setDescJson(checkDescriptionEmpty(markup) ? "":markup)
    },[content])

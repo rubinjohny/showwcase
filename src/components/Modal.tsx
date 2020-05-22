@@ -1,8 +1,7 @@
-import React from 'react';
+import React, {FunctionComponent} from 'react';
 import ReactModal from 'react-modal';
 import styled, {keyframes } from 'styled-components'
 import { Box, Button, Text}  from '../Utils/StyledComponents'
-import ModalForm from './ModalForm'
 
 const fadeIn = keyframes`
    0% {
@@ -41,30 +40,32 @@ const StyledReactModal = styled(ReactModal)`
 `;
 interface Props {
    showModal:boolean;
-   handleCloseModal:() => void;
-   setModalFormValues:({}) => void;
+   headerText:string;
+   contentlabel?:string;
+   overlayStyle?:{};
+   contentStyle?:{};
+   onCloseButton:() => void;
 }
-const Modal = ({ showModal, handleCloseModal, setModalFormValues}:Props) => {
+const Modal: FunctionComponent<Props> = ({ showModal, onCloseButton, headerText, overlayStyle, contentStyle, contentlabel, children}) => {
 
 
    return(
       <StyledReactModal
          isOpen={showModal}
-         contentLabel="Add Education"
+         contentLabel={contentlabel}
          ariaHideApp={false}
          style={{
-            overlay: Styles.overlay,
-            content: Styles.content
+            overlay: overlayStyle ? overlayStyle : Styles.overlay,
+            content: contentStyle ? contentStyle : Styles.content
          }}
          shouldCloseOnOverlayClick={false}
-         // onRequestClose={handleCloseModal}
       >
          <Box bg="black" height="50px" alignItems="center" justifyContent="space-between" px={3}>
-            <Text color="white">Add a new Education Experience</Text>
-            <Button onClick={() => {handleCloseModal()}}> close </Button>
+            <Text color="white">{headerText}</Text>
+            <Button onClick={() => { onCloseButton()}}> close </Button>
          </Box>
 
-         <ModalForm  handleCloseModal={handleCloseModal}/>
+         {children}
          
       </StyledReactModal>
    )

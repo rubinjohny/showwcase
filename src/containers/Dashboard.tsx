@@ -1,16 +1,15 @@
 import React, {useState} from 'react';
-import * as actions from '../redux/actions';
-import { StoreState, edu } from '../types/index';
+import { StoreState } from '../types/index';
 import { useSelector } from 'react-redux'
 import Header from '../components/Header';
 import {Box, Text, TextEllipsis} from '../Utils/StyledComponents'
 import EducationCard from '../components/Education'
 import Modal from '../components/Modal'
 import Emoji from '../components/Emoji'
+import ModalForm from '../components/ModalForm'
 
 const Dashboard = () => {
    const [showModal, setModal] = useState(false);
-   const [modalFormValues, setModalFormValues] = useState({});
 
    const name = useSelector((state:StoreState) => state.userName)
    const education = useSelector((state: StoreState) => state.education)
@@ -49,7 +48,13 @@ const Dashboard = () => {
             )}
          </Box>
 
-         <Modal showModal={showModal} handleCloseModal={handleCloseModal} setModalFormValues={setModalFormValues} />
+         <Modal 
+            showModal={showModal} 
+            onCloseButton={handleCloseModal}
+            headerText="Add Education" 
+         >
+            <ModalForm handleCloseModal={handleCloseModal}/>
+         </Modal>
          
       </React.Fragment>
    )
