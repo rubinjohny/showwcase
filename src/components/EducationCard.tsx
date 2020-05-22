@@ -1,3 +1,4 @@
+// This represents each education card
 import React from 'react'
 import {Box, Text, Col, DarkRow} from '../Utils/StyledComponents'
 import {Education} from '../types/index'

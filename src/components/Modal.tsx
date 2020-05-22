@@ -27,7 +27,6 @@ const Styles = {
       top: '100px',
       left: '30%',
       right: '30%',
-      bottom: '100px',
       background: '#fff',
       overflow: 'auto',
       WebkitOverflowScrolling: 'touch',
