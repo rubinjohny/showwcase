@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import ReactModal from 'react-modal';
 import styled, {keyframes } from 'styled-components'
 import { AutoComplete, Input, DatePicker, InputNumber } from 'antd';
-import { Box, BlueButton, Button, Text}  from './StyledComponents'
+import { Box, BlueButton, Button, Text}  from '../Utils/StyledComponents'
 import axios from 'axios'
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux'

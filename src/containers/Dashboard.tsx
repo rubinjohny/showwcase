@@ -4,7 +4,7 @@ import { StoreState, edu } from '../types/index';
 import {connect} from 'react-redux';
 import { Dispatch} from 'redux'
 import Header from '../components/Header';
-import {Box, Text, TextEllipsis} from '../components/StyledComponents'
+import {Box, Text, TextEllipsis} from '../Utils/StyledComponents'
 import EducationCard from '../components/Education'
 import Modal from '../components/Modal'
 import Emoji from '../components/Emoji'

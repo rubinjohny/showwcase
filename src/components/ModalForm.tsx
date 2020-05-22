@@ -4,9 +4,9 @@ import { Dispatch } from 'redux'
 import { edu } from '../types/index';
 import * as actions from '../redux/actions/index';
 import { Form, Input, Button, Select, AutoComplete, DatePicker, InputNumber } from 'antd';
-import {degrees, fields, gradeScales} from '../Utils'
+import {degrees, fields, gradeScales} from '../Utils/Utils'
 import axios from 'axios'
-import {Box,Text} from "../components/StyledComponents"
+import {Box,Text} from "../Utils/StyledComponents"
 import Editor from './TextAreaInput'
 
 const { RangePicker } = DatePicker;

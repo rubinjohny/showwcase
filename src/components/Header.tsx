@@ -1,5 +1,5 @@
 import React from 'react'
-import {StyledHeader, Text, Button, Box} from './StyledComponents'
+import {StyledHeader, Text, Button, Box} from '../Utils/StyledComponents'
 
 interface Props {
    name:string;
