@@ -1,39 +1,19 @@
 import React, {useState} from 'react';
 import * as actions from '../redux/actions';
 import { StoreState, edu } from '../types/index';
-import {connect} from 'react-redux';
-import { Dispatch} from 'redux'
+import { useSelector } from 'react-redux'
 import Header from '../components/Header';
 import {Box, Text, TextEllipsis} from '../Utils/StyledComponents'
 import EducationCard from '../components/Education'
 import Modal from '../components/Modal'
 import Emoji from '../components/Emoji'
 
-
-// const data = [
-//    {
-//       university:"University of San Francisco",
-//       location:"California",
-//       degree:"Masters",
-//       field:"Computer Science",
-//       duration:[undefined, undefined],
-//       grade:"0",
-//       "max grade":"4.0",
-//       startDate:"undefined",
-//       endDate:"undefined",
-//       description:"<p><strong>asd</strong></p>"
-//    }
-// ]
-
-export interface Props {
-   name: string;
-   adduser?: (name:string) => void;
-   education:edu[]
-}
-
-const Dashboard = ({name, education}:Props) => {
+const Dashboard = () => {
    const [showModal, setModal] = useState(false);
    const [modalFormValues, setModalFormValues] = useState({});
+
+   const name = useSelector((state:StoreState) => state.userName)
+   const education = useSelector((state: StoreState) => state.education)
 
    function handleCloseModal(){
       setModal(false)
@@ -75,16 +55,4 @@ const Dashboard = ({name, education}:Props) => {
    )
 }
 
-export function mapStateToProps({ userName, education }: StoreState) {
-   return {
-      name: userName,
-      education:education
-   }
-}
-export function mapDispatchToProps(dispatch: Dispatch<actions.userAction>) {
-   return {
-      adduser: (name:string) => dispatch(actions.addUser(name)),
-   }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+export default Dashboard;

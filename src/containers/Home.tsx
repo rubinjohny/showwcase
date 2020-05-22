@@ -1,26 +1,21 @@
 import React, { FunctionComponent, useState } from 'react';
 import * as actions from '../redux/actions';
-import { connect } from 'react-redux';
-import { Dispatch } from 'redux'
+import { useDispatch } from 'react-redux'
 import { useHistory } from "react-router-dom";
 import Emoji from '../components/Emoji'
 import {Box, Text, Input, Button} from '../Utils/StyledComponents';
 
-
-interface Props {
-   adduser: (name:string) => void 
-}
-
-const Home:FunctionComponent<Props> = ({adduser}:Props) => {
+const Home:FunctionComponent = () => {
 
    const [username, setName] = useState("");
    const history = useHistory();
+   const dispatch = useDispatch();
 
    function onEnter(){
       if(username === "")
          alert("please enter name!")
       else{
-         adduser(username)
+         dispatch(actions.addUser(username))
          history.push("/dashboard")
       }
    }
@@ -52,10 +47,4 @@ const Home:FunctionComponent<Props> = ({adduser}:Props) => {
    )
 }
 
-export function mapDispatchToProps(dispatch: Dispatch<actions.userAction>) {
-   return {
-      adduser: (name: string) => dispatch(actions.addUser(name)),
-   }
-}
-
-export default connect(state => state, mapDispatchToProps)(Home);
+export default Home;

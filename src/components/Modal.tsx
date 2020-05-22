@@ -1,13 +1,7 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import ReactModal from 'react-modal';
 import styled, {keyframes } from 'styled-components'
-import { AutoComplete, Input, DatePicker, InputNumber } from 'antd';
-import { Box, BlueButton, Button, Text}  from '../Utils/StyledComponents'
-import axios from 'axios'
-import { connect } from 'react-redux';
-import { Dispatch } from 'redux'
-import { edu } from '../types/index';
-import * as actions from '../redux/actions/index';
+import { Box, Button, Text}  from '../Utils/StyledComponents'
 import ModalForm from './ModalForm'
 
 const fadeIn = keyframes`
@@ -48,7 +42,6 @@ const StyledReactModal = styled(ReactModal)`
 interface Props {
    showModal:boolean;
    handleCloseModal:() => void;
-   addEducation:(edu:edu) => void;
    setModalFormValues:({}) => void;
 }
 const Modal = ({ showModal, handleCloseModal, setModalFormValues}:Props) => {
@@ -77,10 +70,4 @@ const Modal = ({ showModal, handleCloseModal, setModalFormValues}:Props) => {
    )
 }
 
-function mapDispatchToProps(dispatch: Dispatch<actions.add_education>) {
-   return {
-      addEducation: (data: edu) => dispatch(actions.addEducation(data)),
-   }
-}
-
-export default connect(state=>state, mapDispatchToProps)(Modal);
+export default Modal;

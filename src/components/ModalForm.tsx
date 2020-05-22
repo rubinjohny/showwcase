@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import { Dispatch } from 'redux'
 import { edu } from '../types/index';
 import * as actions from '../redux/actions/index';
@@ -12,10 +12,10 @@ import Editor from './TextAreaInput'
 const { RangePicker } = DatePicker;
 type dateType = string|undefined;
 interface Props {
-   addEducation: (edu: edu) => void
    handleCloseModal:() => void
 }
-const ModalForm = ({ addEducation, handleCloseModal}:Props) => {
+
+const ModalForm = ({ handleCloseModal}:Props) => {
    const [options, setOptions] = useState<{ value: string }[]>([]);
    const [date, setDate] = useState<dateType[]>([]);
    const [gradeRequired, setGradeRequired] = useState(false);
@@ -23,6 +23,7 @@ const ModalForm = ({ addEducation, handleCloseModal}:Props) => {
    const [maxGrade, setMaxGrade] = useState(0);
    const [descJson, setDescJson] = useState({})
    
+   const dispatch = useDispatch();
 
    useEffect(() => {
       onSearch("")
@@ -47,7 +48,15 @@ const ModalForm = ({ addEducation, handleCloseModal}:Props) => {
       let startDate = values.date[0].format("MM/DD/YY");
       let endDate = values.date[1].format("MM/DD/YY");
 
-      addEducation({ ...values, description: descJson, grade: (values.grade && values["max grade"]) ?  values.grade + "/" + values["max grade"]:"", startDate: startDate != "undefined" ? startDate:"", endDate: endDate != "undefined" ? endDate : ""});
+      let edu = { 
+         ...values, 
+         description: descJson, 
+         grade: (values.grade && values["max grade"]) ? values.grade + "/" + values["max grade"] : "", 
+         startDate: startDate != "undefined" ? startDate : "", 
+         endDate: endDate != "undefined" ? endDate : "" 
+      }
+      dispatch(actions.addEducation(edu))
+
       handleCloseModal()
    };
 
@@ -181,10 +190,4 @@ const ModalForm = ({ addEducation, handleCloseModal}:Props) => {
    )
 }
 
-function mapDispatchToProps(dispatch: Dispatch<actions.add_education>) {
-   return {
-      addEducation: (data: edu) => dispatch(actions.addEducation(data)),
-   }
-}
-
-export default connect(state => state, mapDispatchToProps)(ModalForm);
+export default ModalForm;
