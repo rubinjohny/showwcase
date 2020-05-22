@@ -3,6 +3,7 @@ import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { EditorState, convertToRaw } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import draftToHtml from 'draftjs-to-html';
+import {checkDescriptionEmpty} from '../Utils/Utils'
 
 const MyEditor = ({setDescJson}) => {
 
@@ -10,20 +11,18 @@ const MyEditor = ({setDescJson}) => {
    const [content, setContentState] = useState("");
 
    useEffect(()=>{
-      console.log(convertToRaw(e.getCurrentContent()));
 
       let markup = draftToHtml(
          convertToRaw(e.getCurrentContent()),
          {}
       );
-      setDescJson(markup)
+
+      setDescJson(checkDescriptionEmpty(markup) ? "":markup)
    },[content])
 
    const onEditorStateChange = (editorState) => {
       sete(editorState)
    };
-
-
 
    return (
       <Editor

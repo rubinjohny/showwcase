@@ -25,9 +25,9 @@ const EducationCard = ({data}:Props) => {
          {(data.startDate != "" && data.endDate != "") && (<Text color="black">{CalenderIcon}{data.startDate} - {data.endDate}</Text>)}
             <Text color="black">{data.grade != "" ? GradesIcon:""}{data.grade}</Text>
          </Box>
-         <Box p={2}>
+         {data.description != "" && (<Box p={2}>
             <Text color="black"><div dangerouslySetInnerHTML={{ __html: data.description ? data.description : "" }} style={{ width: "100%", textAlign: 'left', maxHeight:200, overflow:'scroll' }} /></Text>
-         </Box>
+         </Box>)}
       </Box>
    )
 }

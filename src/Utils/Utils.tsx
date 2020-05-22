@@ -30,3 +30,7 @@ export const gradeScales = [
    5.0,
    10.0
 ]
+
+export const checkDescriptionEmpty = (markup) => {
+   return markup.trimEnd() == "<p></p>";
+}

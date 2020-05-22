@@ -176,9 +176,6 @@ const ModalForm = ({ setModalValues, addEducation, handleCloseModal}:Props) => {
    )
 }
 
-// export default ModalForm;
-
-
 function mapDispatchToProps(dispatch: Dispatch<actions.add_education>) {
    return {
       addEducation: (data: edu) => dispatch(actions.addEducation(data)),
