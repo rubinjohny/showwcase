@@ -28,7 +28,7 @@ const ModalForm = ({ handleCloseModal}:Props) => {
 
    useEffect(() => {
       onSearch("")
-   })
+   },[])
 
    let timer;
    const onSearch = (searchText: string) => {
