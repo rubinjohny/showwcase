@@ -16,7 +16,7 @@ Features added -
 * Reusable styled components eg - Row, Col, CenteredBox, Text etc
 * Emoji's and icons (FontAwesome) to improve the interface
 * Redux
-   I have only used 1 reducer since i am only saving username and array of education's. Could have used Multiple Reducers and combine them to a signle state. Not needed for this project
+   I have only used 1 reducer since i am only saving username and array of education's. Could have used Multiple Reducers and combined them to a single state. Not needed for this project
    Now the project uses hooks for redux state and dispatching actions instead of connect to maintain consistency
 * Text Editor
    Used a component that in turn uses Draftjs from facebook to let the user input rich text. (supported styles include but not limited to bold, italics, underline, strikethrough etc.)
